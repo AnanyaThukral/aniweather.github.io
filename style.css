@@ -96,3 +96,37 @@ main {
   font-weight: 500;
   text-shadow: 4px 6px #201414;
 }
+
+.alert .alert-warning {
+  color: white;
+  font-size: 24px;
+  margin: 20px;
+  margin-left: -10px;
+  font-weight: 500;
+  text-shadow: 4px 6px #201414;
+}
+
+.alert .warning {
+  color: red;
+  font-size: 24px;
+  margin: 20px;
+}
+
+.warning,
+.alert-warning {
+  display: inline;
+}
+
+.alert {
+  margin: 20px;
+}
+
+#snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1000;
+}

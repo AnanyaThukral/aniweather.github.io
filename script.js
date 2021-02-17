@@ -3,11 +3,17 @@ const api = {
     base: "https://api.openweathermap.org/data/2.5/" 
 }
 
+const api2 = {
+    key: "T89XRU8S2XHX72RPHBSFH3KJM",
+    base: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
+}
+
 const searchbox = document.querySelector(".search-box")
 
 searchbox.addEventListener("keypress", (event) => {
     if(event.keyCode == 13){
         getResults(searchbox.value)
+        getAlerts(searchbox.value)
         console.log(searchbox.value)
     }
 })
@@ -20,7 +26,7 @@ const getResults = (query) => {
 }
 
 const displayResults = (weather) => {
-    console.log(weather)
+    //console.log(weather)
     let city = document.querySelector(".location .city")
     city.innerText = `${weather.name}, ${weather.sys.country}`
     let d = document.querySelector(".location .date")
@@ -45,4 +51,31 @@ const dateBuilder = (d) => {
 
     return `${day} ${date} ${month} ${year}`
 
+}
+
+const getAlerts = (query) => {
+    fetch(`${api2.base}${query}?q=&key=${api2.key}`).then(Response => {
+        if (Response.ok){
+        return Response.json()
+    }}).then(displayAlert)
+}
+
+const displayAlert = (Response) => {
+    console.log(Response)
+    let alert = document.querySelector(".alert .alert-warning")
+    let warning = document.querySelector(".alert .warning")
+    //let warning = document.querySelector(".alert .warning").remove
+    //onsole.log(alert.textContent)
+    if(Response.alerts.length == 0){
+        console.log('no warnings')
+        //document.querySelectorAll(".alert")[0].style.visibility = 'hidden'
+        alert.innerText = " "
+        warning.innerText = " "
+        //console.log(alert.innerText)
+    }else{
+        //console.log('WARNINGS!')
+        alert.textContent = `${Response.alerts[0].event}`
+        warning.textContent = "WARNING!"
+        //console.log(alert.textContent)
+    }
 }

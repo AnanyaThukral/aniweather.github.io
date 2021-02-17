@@ -1,8 +1,9 @@
-# aniweather.github.io
+# Weather App
 
 This is my First Weather App!
 
-The languages/tools used:
+# Tech Stack:
+
 - Html
 - CSS
 - Javascript
